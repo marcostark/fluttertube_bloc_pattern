@@ -7,8 +7,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:youtube_bloc_pattern/main.dart';
 import 'package:youtube_bloc_pattern/pages/HomePage.dart';
 
 void main() {

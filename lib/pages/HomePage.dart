@@ -24,8 +24,10 @@ class HomePage extends StatelessWidget {
             ),
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {
-              showSearch(context: context, delegate: DataSearch()); // Tela de pesquisa
+            onPressed: () async {
+              // Pegando o termo passado pela tela de pesquisa
+              String result = await showSearch(context: context, delegate: DataSearch()); // Tela de pesquisa
+              print(result);
             },
           )
         ],
