@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
+import 'package:youtube_bloc_pattern/models/Video.dart';
+
 
 const API_KEY = "AIzaSyDJjvfseoNR5ot7fSDBXA7ub2iiCWFuz60";
 
@@ -25,12 +27,20 @@ class ApiClient {
 
   }
 
-  void _decodeToJson(http.Response response) {
+  List<Video> _decodeToJson(http.Response response) {
     if(response.statusCode == 200){
+      
       var decoded = json.decode(response.body);
 
+      List<Video> videos = decoded["items"].map<Video>(
+        (map) {
+          return Video.fromJson(map);
+        }
+      ).toList();
 
-
+    return videos;    
+    } else {
+      throw Exception("Erro ai carregar videos");
     }
   }
 }

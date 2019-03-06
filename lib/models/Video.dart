@@ -7,7 +7,7 @@ class Video {
 
   Video({this.id, this.title, this.thumb, this.channel});
 
-  factory Video.fronJson(Map<String, dynamic> json){
+  factory Video.fromJson(Map<String, dynamic> json){
 
     return Video(
       id: json['id']['videoID'],
