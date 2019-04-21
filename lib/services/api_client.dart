@@ -18,7 +18,13 @@ const API_KEY = "AIzaSyDJjvfseoNR5ot7fSDBXA7ub2iiCWFuz60";
 
 class ApiClient {
 
-  search(String term) async {
+  String _search;
+  String _nextToken;
+
+  Future<List<Video>> search(String term) async {
+
+    _search = term;
+
     http.Response response = await http.get(
         "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$term&type=video&key=$API_KEY&maxResults=10"
     );
@@ -27,10 +33,20 @@ class ApiClient {
 
   }
 
+  Future<List<Video>> nextPage() async {
+    http.Response response = await http.get(
+        "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$_search&type=video&key=$API_KEY&maxResults=10&pageToken=$_nextToken"
+    );
+
+    return _decodeToJson(response);
+  }
+
   List<Video> _decodeToJson(http.Response response) {
     if(response.statusCode == 200){
       
       var decoded = json.decode(response.body);
+
+      _nextToken = decoded["nextPageToken"];
 
       List<Video> videos = decoded["items"].map<Video>(
         (map) {

@@ -40,15 +40,28 @@ class HomeScreen extends StatelessWidget {
       body: StreamBuilder(
         // A qualquer alteração a tela é atualizada
         stream: BlocProvider.of<VideoBloc>(context).outVideos,
+        initialData: [],
         builder: (context, snapshot){
           if(snapshot.hasData){
             // Mostrar os resultados
             return ListView.builder(
               itemBuilder: (context, index){
                 print(snapshot);
-                return VideoTile(snapshot.data[index]);
+                if(index < snapshot.data.length){
+                  return VideoTile(snapshot.data[index]);
+                } else if (index > 1){
+                  BlocProvider.of<VideoBloc>(context).inSearch.add(null);
+                  return Container(
+                    width: 40,
+                    height: 40,
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.red),),
+                    );
+                } else {
+                  Container();
+                }
               },
-              itemCount: snapshot.data.length,
+              itemCount: snapshot.data.length + 1,
             );
           } else {
             return Container();
