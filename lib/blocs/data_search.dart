@@ -80,7 +80,7 @@ class DataSearch extends SearchDelegate<String> {
         "http://suggestqueries.google.com/complete/search?hl=en&ds=yt&client=youtube&hjson=t&cp=1&q=$term&format=5&alt=json");
 
     if (response.statusCode == 200) {
-      json.decode(response.body[1]).map((valor) {
+      return json.decode(response.body[1]).map((valor) {
         return valor[0];
       }).toList();
     } else {

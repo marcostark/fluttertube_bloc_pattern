@@ -2,14 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_bloc_pattern/blocs/data_search.dart';
 
-class HomePage extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Container(
           height: 25.0,
-          child: Image.asset("images/ty_logo_rgb_dark.png"),
+          child: Image.asset("images/yt_logo_rgb_dark.png"),
         ),
         elevation: 0,
         backgroundColor: Colors.black54,

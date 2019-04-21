@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-import 'package:youtube_bloc_pattern/models/Video.dart';
+import 'package:youtube_bloc_pattern/models/video.dart';
 
 
 const API_KEY = "AIzaSyDJjvfseoNR5ot7fSDBXA7ub2iiCWFuz60";
@@ -40,7 +40,7 @@ class ApiClient {
 
     return videos;    
     } else {
-      throw Exception("Erro ai carregar videos");
+      throw Exception("Erro ao carregar lista de videos");
     }
   }
 }

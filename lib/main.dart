@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:youtube_bloc_pattern/pages/HomePage.dart';
+import 'package:youtube_bloc_pattern/screens/home_screen.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: 'Flutter Demo',
+    title: 'FlutterTube',
     theme: ThemeData(
       primarySwatch: Colors.blue,
     ),
-    home: HomePage(),
+    debugShowCheckedModeBanner: false,
+    home: HomeScreen(),
   ));
 }
