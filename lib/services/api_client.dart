@@ -23,7 +23,7 @@ class ApiClient {
         "https://www.googleapis.com/youtube/v3/search?part=snippet&q=$term&type=video&key=$API_KEY&maxResults=10"
     );
 
-    _decodeToJson(response);
+    return _decodeToJson(response);
 
   }
 

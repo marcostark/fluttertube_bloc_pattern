@@ -13,7 +13,7 @@ class Video {
       id: json['id']['videoID'],
       title: json['snippet']['title'],
       thumb: json['snippet']['thumbnails']['high']['url'],
-      channel: json['snippet']['channel'],
+      channel: json['snippet']['channelTitle'],
     );
   }
 }

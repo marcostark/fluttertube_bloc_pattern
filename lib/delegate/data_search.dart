@@ -19,7 +19,7 @@ class DataSearch extends SearchDelegate<String> {
   }
 
   @override
-  Widget buildLeading(BuildContext context) {
+  Widget buildLeading(BuildContext context) { // Botão de voltar
     return IconButton(
       icon: AnimatedIcon(
         icon: AnimatedIcons.menu_arrow,
@@ -80,7 +80,7 @@ class DataSearch extends SearchDelegate<String> {
         "http://suggestqueries.google.com/complete/search?hl=en&ds=yt&client=youtube&hjson=t&cp=1&q=$term&format=5&alt=json");
 
     if (response.statusCode == 200) {
-      return json.decode(response.body[1]).map((valor) {
+      return json.decode(response.body)[1].map((valor) {
         return valor[0];
       }).toList();
     } else {

@@ -1,6 +1,9 @@
 
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_bloc_pattern/blocs/data_search.dart';
+import 'package:youtube_bloc_pattern/blocs/video_bloc.dart';
+import 'package:youtube_bloc_pattern/delegate/data_search.dart';
+import 'package:youtube_bloc_pattern/widgets/video_tile.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -27,13 +30,30 @@ class HomeScreen extends StatelessWidget {
             onPressed: () async {
               // Pegando o termo passado pela tela de pesquisa
               String result = await showSearch(context: context, delegate: DataSearch()); // Tela de pesquisa
-              print(result);
+              if (result != null) BlocProvider.of<VideoBloc>(context).inSearch.add(result);
+              print("Resultado da busca"+result);
             },
           )
         ],
       ),
-      body: Container(
-
+      backgroundColor: Colors.black,
+      body: StreamBuilder(
+        // A qualquer alteração a tela é atualizada
+        stream: BlocProvider.of<VideoBloc>(context).outVideos,
+        builder: (context, snapshot){
+          if(snapshot.hasData){
+            // Mostrar os resultados
+            return ListView.builder(
+              itemBuilder: (context, index){
+                print(snapshot);
+                return VideoTile(snapshot.data[index]);
+              },
+              itemCount: snapshot.data.length,
+            );
+          } else {
+            return Container();
+          }
+        },
       ),
     );
   }
